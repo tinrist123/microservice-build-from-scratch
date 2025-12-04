@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,6 +27,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getProduct(List<String> skus) {
+        log.info("request income getProduct: {} - thread : {}", skus, Thread.currentThread().getName());
+
+        List<Integer> dumpMemories = new ArrayList<>();
+        for (int i = 0; i < 100_000; i++) {
+            dumpMemories.add(i);
+        }
+
+        dumpMemories.stream().anyMatch(o -> o.equals(-1));
+
         return productMapper.toProductDTOS(
                 productRepository.findBySkuIn(new HashSet<>(skus))
         );

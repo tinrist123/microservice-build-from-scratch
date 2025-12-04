@@ -1,23 +1,39 @@
 server:
   port: 8082
-
+  tomcat:
+    threads:
+      max: 50        # 👈 hard cap on concurrent request-processing threads
+      min-spare: 20 # keep this many idle worker threads around
+    accept-count: 100     # queue length when all worker threads are busy
+    max-connections: 8192 # max concurrent socket connections (keep-alive)
+    connection-timeout: 20000 # ms to wait for the first byte of the request
 spring:
   application:
     name: product-service
   datasource:
-    url: jdbc:mysql://localhost:3306/product_service
+    url: jdbc:mysql://condescending_shockley:3306/product_service
     username: admin
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: ProductHikariCP
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000           # 30 seconds
+      connection-timeout: 20000     # 20 seconds
+      max-lifetime: 1800000         # 30 minutes
+      auto-commit: true
+      validation-timeout: 5000
+      connection-test-query: SELECT 1  # Ensures connectivity health check
 
   jpa:
-    show-sql: true
+#    show-sql: true
     properties:
       hibernate:
-        format_sql: true
+#        format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
         boot:
           allow_jdbc_metadata_access: false
-logging:
-  level:
-    org.hibernate.SQL: debug
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
