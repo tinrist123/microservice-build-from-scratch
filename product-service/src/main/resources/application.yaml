@@ -1,3 +1,7 @@
+common:
+  logging:
+    enabled: true
+
 server:
   port: 8082
   tomcat:
@@ -7,6 +11,8 @@ server:
     accept-count: 100     # queue length when all worker threads are busy
     max-connections: 8192 # max concurrent socket connections (keep-alive)
     connection-timeout: 20000 # ms to wait for the first byte of the request
+
+
 spring:
   application:
     name: product-service
@@ -37,3 +43,9 @@ spring:
 #logging:
 #  level:
 #    org.hibernate.SQL: debug
+cache:
+  redis:
+    host: localhost
+    port: 6379
+    defaultTtl: 15m
+    enabled: true

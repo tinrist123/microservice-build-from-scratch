@@ -1,13 +1,21 @@
 package com.ecommerce.product;
 
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication
-@EnableScheduling
-public class ProductServiceApplication {
+import java.time.LocalDateTime;
 
+@SpringBootApplication(
+		scanBasePackages = {
+				"com.ecommerce.product", "com.common_logging.logging.library"
+		}
+)
+@EnableScheduling
+@Slf4j
+public class ProductServiceApplication {
 	public static void main(String[] args) {
 		long maxMemory = Runtime.getRuntime().maxMemory();       // bytes
 		long totalMemory = Runtime.getRuntime().totalMemory();   // current heap size
@@ -21,4 +29,8 @@ public class ProductServiceApplication {
 		SpringApplication.run(ProductServiceApplication.class, args);
 	}
 
+	@PostConstruct
+	public void logStartup() {
+		log.info(">>> JVM STARTED AT: {} <<<", LocalDateTime.now());
+	}
 }

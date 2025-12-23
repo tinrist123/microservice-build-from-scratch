@@ -1,0 +1,82 @@
+version: "3.8"
+
+networks:
+  mynet:
+    external: true
+
+services:
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: nexus
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - nexus-data:/nexus-data
+    networks:
+      - mynet
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    image: product-service:latest
+    ports:
+      - "8082:8082"
+
+    depends_on:
+      - nexus
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xms212m -Xmx212m -XX:ActiveProcessorCount=1
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+    networks:
+      - mynet
+  redis-master:
+    image: redis:7.4-alpine
+    container_name: redis-master
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --maxmemory 200mb
+      --maxmemory-policy noeviction
+      --appendonly yes
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.50"
+    volumes:
+      - D:\Learning\docker-storage\redis:/data
+    restart: unless-stopped
+    networks:
+      - mynet
+  redis-replica:
+    image: redis:7.4-alpine
+    container_name: redis-replica
+    ports:
+      - "6380:6379"
+    command: >
+      redis-server
+      --maxmemory 200mb
+      --maxmemory-policy noeviction
+      --replicaof redis-master 6379
+    deploy:
+      resources:
+
+        limits:
+          memory: 256M
+          cpus: "0.50"
+    volumes:
+      - D:\Learning\docker-storage\redis:/data
+    restart: unless-stopped
+    networks:
+      - mynet
+    depends_on:
+      - redis-master
+volumes:
+  nexus-data:

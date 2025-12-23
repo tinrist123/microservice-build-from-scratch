@@ -1,4 +1,4 @@
-package com.ecommerce.product.persistence.service;
+package com.ecommerce.product.service;
 
 import com.ecommerce.product.model.request.ProductDTO;
 

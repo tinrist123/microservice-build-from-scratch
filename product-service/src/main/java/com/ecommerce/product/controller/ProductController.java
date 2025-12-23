@@ -1,7 +1,7 @@
 package com.ecommerce.product.controller;
 
 import com.ecommerce.product.model.request.ProductDTO;
-import com.ecommerce.product.persistence.service.ProductService;
+import com.ecommerce.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

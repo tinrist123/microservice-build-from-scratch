@@ -1,0 +1,18 @@
+<configuration>
+    <property name="PATTERN"
+              value="%d{HH:mm:ss.SSS} [%thread] %-5level [trace=%X{traceId:-}] [req=%X{requestId:-}] [%X{httpMethod:-}] [%X{uri:-}] [status=%X{status:-}] [time=%X{durationMs:-}ms] %logger{36} - %msg%n"/>
+
+    <appender name="CONSOLE_SYNC" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder><pattern>${PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- Async wrapper: offload logging to a background thread -->
+    <appender name="CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>8192</queueSize>          <!-- bigger queue for bursts -->
+        <discardingThreshold>80</discardingThreshold> <!-- drop DEBUG/TRACE when 80% full -->
+        <neverBlock>true</neverBlock>         <!-- never stall request thread -->
+        <appender-ref ref="CONSOLE_SYNC"/>
+    </appender>
+
+    <root level="INFO"><appender-ref ref="CONSOLE"/></root>
+</configuration>

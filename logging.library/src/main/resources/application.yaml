@@ -1,0 +1,23 @@
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+
+common:
+  logging:
+    enabled: true
+    include-headers: true
+    include-payload: true
+    max-payload-length: 3000
+    exclude-paths:
+      - /actuator
+    mask-headers:
+      - Authorization
+    mask-json-fields:
+      - password
+      - secret
+
+spring:
+  application:
+    name: logging-library

@@ -1,40 +1,15 @@
-# ================================
-# 1) Build Stage
-# ================================
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-
+FROM maven:3.9.9-eclipse-temurin-21 AS builder
 WORKDIR /app
 
-# Copy pom first (better cache)
-COPY pom.xml .
+# Copy Maven settings
+RUN mkdir -p /root/.m2
+COPY maven/settings.xml /root/.m2/settings.xml
 
-# Download dependencies (cached layer)
-RUN mvn -q -e -B dependency:go-offline
+# Build
+COPY . .
+RUN mvn -B -DskipTests clean package
 
-# Copy source code
-COPY src ./src
-
-# Build Spring Boot app
-RUN mvn -q -e -B clean package -DskipTests
-
-
-# ================================
-# 2) Run Stage
-# ================================
-FROM eclipse-temurin:21-jre-alpine
-
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-
-# Copy jar from build stage
-COPY --from=build /app/target/*.jar app.jar
-
-# JVM options (feel free to edit)
-ENV JAVA_OPTS="-Xms128m -Xmx256m"
-
-# Expose port
-EXPOSE 8080
-
-# Start application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
-
-
+COPY --from=builder /app/target/*.jar app.jar
+CMD ["java","-jar","/app/app.jar"]
