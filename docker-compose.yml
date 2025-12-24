@@ -2,9 +2,29 @@ version: "3.8"
 
 networks:
   mynet:
-    external: true
+    driver: bridge
 
 services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    hostname: 2366b6bd5e53
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: jpa-approach
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+      MYSQL_MAJOR: innovation
+      MYSQL_VERSION: 9.1.0-1.el9
+      MYSQL_SHELL_VERSION: 9.1.0-1.el9
+      GOSU_VERSION: 1.17
+    volumes:
+      - D:/Learning/docker-storage/mysql:/var/lib/mysql
+    restart: "no"
+    networks:
+      - mynet
   nexus:
     image: sonatype/nexus3:latest
     container_name: nexus
@@ -55,6 +75,7 @@ services:
     restart: unless-stopped
     networks:
       - mynet
+
   redis-replica:
     image: redis:7.4-alpine
     container_name: redis-replica
@@ -78,5 +99,45 @@ services:
       - mynet
     depends_on:
       - redis-master
+
+  redis-sentinel-1:
+    image: redis:7.4-alpine
+    container_name: redis-sentinel-1
+    command: redis-sentinel /etc/redis/sentinel.conf
+    volumes:
+      - D:\Learning\docker-storage\redis-sentinel\sentinel.conf:/etc/redis/sentinel.conf
+    ports:
+      - "26379:26379"
+    depends_on:
+      - redis-master
+    networks:
+      - mynet
+
+  redis-sentinel-2:
+    image: redis:7.4-alpine
+    container_name: redis-sentinel-2
+    command: redis-sentinel /etc/redis/sentinel.conf
+    volumes:
+      - D:\Learning\docker-storage\redis-sentinel\sentinel.conf:/etc/redis/sentinel.conf
+    ports:
+      - "26380:26379"
+    depends_on:
+      - redis-master
+    networks:
+      - mynet
+
+  redis-sentinel-3:
+    image: redis:7.4-alpine
+    container_name: redis-sentinel-3
+    command: redis-sentinel /etc/redis/sentinel.conf
+    volumes:
+      - D:\Learning\docker-storage\redis-sentinel\sentinel.conf:/etc/redis/sentinel.conf
+    ports:
+      - "26381:26379"
+    depends_on:
+      - redis-master
+    networks:
+      - mynet
+
 volumes:
   nexus-data:

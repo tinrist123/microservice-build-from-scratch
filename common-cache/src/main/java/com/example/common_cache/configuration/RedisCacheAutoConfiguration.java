@@ -9,8 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -18,65 +17,45 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @AutoConfiguration
 @ConditionalOnClass(RedisTemplate.class)
-@ConditionalOnProperty(
-        prefix = "cache.redis",
-        name = "enabled",
-        havingValue = "true"
-)
+@ConditionalOnProperty(prefix = "cache.redis", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(RedisProperties.class)
 @EnableCaching
 public class RedisCacheAutoConfiguration {
 
-    @Bean
-    public LettuceConnectionFactory redisConnectionFactory(RedisProperties properties) {
+        @Bean
+        public RedisTemplate<String, Object> redisTemplate(
+                        RedisConnectionFactory connectionFactory) {
 
-        RedisStandaloneConfiguration config =
-                new RedisStandaloneConfiguration(
-                        properties.getHost(),
-                        properties.getPort()
-                );
+                RedisSerializer<String> keySerializer = new StringRedisSerializer();
+                RedisSerializer<Object> valueSerializer = RedisSerializer.json();
 
-        return new LettuceConnectionFactory(config);
-    }
+                RedisTemplate<String, Object> template = new RedisTemplate<>();
+                template.setConnectionFactory(connectionFactory);
 
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(
-            LettuceConnectionFactory connectionFactory) {
+                template.setKeySerializer(keySerializer);
+                template.setValueSerializer(valueSerializer);
+                template.setHashKeySerializer(keySerializer);
+                template.setHashValueSerializer(valueSerializer);
 
-        RedisSerializer<String> keySerializer = new StringRedisSerializer();
-        RedisSerializer<Object> valueSerializer =
-                RedisSerializer.json();
+                template.afterPropertiesSet();
+                return template;
+        }
 
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(connectionFactory);
+        @Bean
+        public CacheManager cacheManager(
+                        RedisConnectionFactory connectionFactory, RedisProperties properties) {
 
-        template.setKeySerializer(keySerializer);
-        template.setValueSerializer(valueSerializer);
-        template.setHashKeySerializer(keySerializer);
-        template.setHashValueSerializer(valueSerializer);
+                RedisSerializer<Object> valueSerializer = RedisSerializer.json();
 
-        template.afterPropertiesSet();
-        return template;
-    }
+                RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                                .serializeValuesWith(
+                                                RedisSerializationContext.SerializationPair
+                                                                .fromSerializer(valueSerializer))
+                                .entryTtl(properties.getDefaultTtl())
+                                .disableCachingNullValues();
 
-    @Bean
-    public CacheManager cacheManager(
-            LettuceConnectionFactory connectionFactory, RedisProperties properties) {
-
-        RedisSerializer<Object> valueSerializer =
-                RedisSerializer.json();
-
-        RedisCacheConfiguration config =
-                RedisCacheConfiguration.defaultCacheConfig()
-                        .serializeValuesWith(
-                                RedisSerializationContext.SerializationPair
-                                        .fromSerializer(valueSerializer)
-                        )
-                        .entryTtl(properties.getDefaultTtl())
-                        .disableCachingNullValues();
-
-        return RedisCacheManager.builder(connectionFactory)
-                .cacheDefaults(config)
-                .build();
-    }
+                return RedisCacheManager.builder(connectionFactory)
+                                .cacheDefaults(config)
+                                .build();
+        }
 }

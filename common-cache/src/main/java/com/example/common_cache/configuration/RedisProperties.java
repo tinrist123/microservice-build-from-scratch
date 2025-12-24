@@ -12,16 +12,6 @@ import java.time.Duration;
 @Setter
 public class RedisProperties {
 
-    /**
-     * Redis host
-     */
-    private String host = "localhost";
-
-    /**
-     * Redis port
-     */
-    private int port = 6379;
-
     private Boolean enabled;
 
     private Duration defaultTtl = Duration.ofMinutes(10);
