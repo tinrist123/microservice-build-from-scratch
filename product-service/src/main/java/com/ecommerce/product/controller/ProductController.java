@@ -1,5 +1,6 @@
 package com.ecommerce.product.controller;
 
+import com.ecommerce.product.messagequeue.producer.MessageProducer;
 import com.ecommerce.product.model.request.ProductDTO;
 import com.ecommerce.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final MessageProducer messageProducer;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -25,5 +27,12 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(ProductDTO productDTO) {
         productService.createProduct(productDTO);
+    }
+
+
+    @PostMapping("/send")
+    @ResponseStatus(HttpStatus.OK)
+    public void sendMessage(@RequestBody ProductDTO productDTO) {
+        messageProducer.sendMessage(productDTO.toString());
     }
 }

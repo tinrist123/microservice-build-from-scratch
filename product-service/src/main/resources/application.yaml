@@ -42,6 +42,13 @@ spring:
       timeout: 2s
       lettuce:
         shutdown-timeout: 200ms
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
   jpa:
 #    show-sql: true
     properties:
@@ -57,3 +64,9 @@ cache:
   redis:
     defaultTtl: 15m
     enabled: true
+
+app:
+  rabbitmq:
+    exchange: demo.exchange
+    queue: demo.queue
+    routing-key: demo.routing.key
