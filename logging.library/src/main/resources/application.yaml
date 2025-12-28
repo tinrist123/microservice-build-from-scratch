@@ -17,7 +17,3 @@ common:
     mask-json-fields:
       - password
       - secret
-
-spring:
-  application:
-    name: logging-library

@@ -1,6 +1,9 @@
 <configuration>
+    <!-- Import Spring property into Logback -->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="unknown"/>
+    
     <property name="PATTERN"
-              value="%d{HH:mm:ss.SSS} [%thread] %-5level [trace=%X{traceId:-}] [req=%X{requestId:-}] [%X{httpMethod:-}] [%X{uri:-}] [status=%X{status:-}] [time=%X{durationMs:-}ms] %logger{36} - %msg%n"/>
+              value="%d{HH:mm:ss.SSS} [%thread] %-5level [${APP_NAME},%X{traceId:-},%X{spanId:-}] [req=%X{requestId:-}] [%X{httpMethod:-}] [%X{uri:-}] [status=%X{status:-}] [time=%X{durationMs:-}ms] %logger{36} - %msg%n"/>
 
     <appender name="CONSOLE_SYNC" class="ch.qos.logback.core.ConsoleAppender">
         <encoder><pattern>${PATTERN}</pattern></encoder>
