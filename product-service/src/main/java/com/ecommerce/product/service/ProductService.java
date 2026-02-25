@@ -1,11 +1,10 @@
 package com.ecommerce.product.service;
 
-import com.ecommerce.product.model.request.ProductDTO;
-
-import java.util.List;
+import com.ecommerce.product.rest.model.ProductPageResponse;
+import com.ecommerce.product.rest.model.ProductResponse;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService{
-    void createProduct(ProductDTO productDTO);
-
-    List<ProductDTO> getProduct(List<String> skus);
+    ProductResponse getProductBySku(String sku);
+    ProductPageResponse getProducts(String queryText, String category, Pageable pageable);
 }

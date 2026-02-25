@@ -1,0 +1,116 @@
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective settings
+[WARNING] Unrecognised tag: 'mirrors' (position: START_TAG seen ...</id>\r\n            <mirrors>... @18:22)  @ C:\Users\18521\.m2\settings.xml, line 18, column 22
+[WARNING] 
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.ecommerce:product-service >--------------------
+[INFO] Building product-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ product-service ---
+[INFO] Deleting D:\Learning\Project\microservices\product-service\target
+[INFO] 
+[INFO] --- openapi-generator:7.18.0:generate (default) @ product-service ---
+[INFO] Generating with dryRun=false
+[INFO] Output directory (D:\Learning\Project\microservices\product-service\target\generated-sources\openapi) does not exist, or is inaccessible. No file (.openapi-generator-ignore) will be evaluated.
+[INFO] OpenAPI Generator: spring (server)
+[INFO] Generator 'spring' is considered stable.
+[INFO] ----------------------------------
+[INFO] Environment variable JAVA_POST_PROCESS_FILE not defined so the Java code may not be properly formatted. To define it, try 'export JAVA_POST_PROCESS_FILE="/usr/local/bin/clang-format -i"' (Linux/Mac)
+[INFO] NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+[INFO] Invoker Package Name, originally not set, is now derived from api package name: com.ecommerce.product.rest.client
+[INFO] Processing operation getProducts
+[INFO] Processing operation getProductBySku
+[WARNING] Unknown `format` decimal detected for type `number`. Defaulting to `number`
+[WARNING] Unknown `format` decimal detected for type `number`. Defaulting to `number`
+[WARNING] Unknown `format` decimal detected for type `number`. Defaulting to `number`
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\rest\model\ErrorResponse.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\rest\model\Pageable.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\rest\model\ProductPageResponse.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\rest\model\ProductResponse.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\rest\client\v1\ProductClientApi.java
+[INFO] Skipping generation of Webhooks.
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\pom.xml
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\README.md
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\rest\client\v1\ApiUtil.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.openapi-generator-ignore
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.openapi-generator\VERSION
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.openapi-generator\FILES
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donation to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+[INFO] 
+[INFO] --- openapi-generator:7.18.0:generate (inventory-service-api) @ product-service ---
+[INFO] Generating with dryRun=false
+[INFO] OpenAPI Generator: java (client)
+[INFO] Generator 'java' is considered stable.
+[INFO] Environment variable JAVA_POST_PROCESS_FILE not defined so the Java code may not be properly formatted. To define it, try 'export JAVA_POST_PROCESS_FILE="/usr/local/bin/clang-format -i"' (Linux/Mac)
+[INFO] NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+[INFO] Invoker Package Name, originally not set, is now derived from api package name: com.ecommerce.product.inventory.rest
+[INFO] Processing operation getInventoryBySkus
+[INFO] 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/]
+[INFO] 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/]
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\model\InventoryResponse.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\test\java\com\ecommerce\product\inventory\rest\model\InventoryResponseTest.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\docs\InventoryResponse.md
+[INFO] 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/]
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\service\InventoryServiceApi.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\test\java\com\ecommerce\product\inventory\rest\service\InventoryServiceApiTest.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\docs\InventoryServiceApi.md
+[INFO] Skipping generation of Webhooks.
+[INFO] 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/]
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\pom.xml
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\README.md
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\build.gradle
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\build.sbt
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\settings.gradle
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\gradle.properties
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\AndroidManifest.xml
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.travis.yml
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\ApiClient.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\ServerConfiguration.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\ServerVariable.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.github\workflows\maven.yml
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\api\openapi.yaml
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\JavaTimeFormatter.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\StringUtil.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\auth\HttpBasicAuth.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\auth\HttpBearerAuth.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\auth\ApiKeyAuth.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\gradlew
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\gradlew.bat
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\gradle\wrapper\gradle-wrapper.properties
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\gradle\wrapper\gradle-wrapper.jar
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\git_push.sh
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.gitignore
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\auth\Authentication.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\RFC3339DateFormat.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\RFC3339InstantDeserializer.java
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\src\main\java\com\ecommerce\product\inventory\rest\RFC3339JavaTimeModule.java
+[INFO] Skipped D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.openapi-generator-ignore (Skipped by supportingFiles options supplied by user.)
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.openapi-generator\VERSION
+[INFO] writing file D:\Learning\Project\microservices\product-service\target\generated-sources\openapi\.openapi-generator\FILES
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donation to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ product-service ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ product-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 42 source files with javac [debug parameters release 21] to target\classes
+[WARNING] /D:/Learning/Project/microservices/product-service/src/main/java/com/ecommerce/product/mapper/ProductMapper.java:[17,21] Unmapped target properties: "id, currency, category, imageUrl, createdAt, updatedAt".
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.959 s
+[INFO] Finished at: 2025-12-30T19:53:02+07:00
+[INFO] ------------------------------------------------------------------------

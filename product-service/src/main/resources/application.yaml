@@ -70,3 +70,12 @@ app:
     exchange: demo.exchange
     queue: demo.queue
     routing-key: demo.routing.key
+
+  service:
+    inventory-service:
+      url: http://inventory-service:8083 
+      connect-timeout: 5000
+      read-timeout: 5000
+  webclient:
+    connect-timeout: 5000
+    read-timeout: 5000

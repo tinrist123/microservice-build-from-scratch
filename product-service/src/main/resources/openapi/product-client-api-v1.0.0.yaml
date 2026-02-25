@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: Product Service API
+  description: API for managing and retrieving product information
+  version: 1.0.0
+  contact:
+    name: E-commerce Team
+    email: support@ecommerce.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+  - url: http://product-service:8080
+    description: Docker environment
+
+
+paths:
+  /api/v1/products:
+    get:
+      tags:
+        - product-client
+      summary: Get list of products
+      description: Retrieve a paginated list of products with optional filtering by name
+      operationId: getProducts
+      parameters:
+        - name: queryText
+          in: query
+          description: Filter products by name (partial match, case-insensitive)
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: Filter products by with category (partial match, case-insensitive)
+          required: false
+          schema:
+            type: string
+        - name: pageable
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/products/{sku}:
+    get:
+      tags:
+        - product-client
+      summary: Get product by ID
+      description: Retrieve detailed information about a specific product
+      operationId: getProductBySku
+      parameters:
+        - name: sku
+          in: path
+          description: sku code
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ProductResponse:
+      type: object
+      required:
+        - name
+        - description
+        - price
+        - availableQuantity
+      properties:
+        name:
+          type: string
+          description: Product name
+          minLength: 1
+          maxLength: 255
+        description:
+          type: string
+          description: Product description
+          maxLength: 2000
+        price:
+          type: number
+          format: decimal
+          description: Product price
+          minimum: 0
+        availableQuantity:
+          type: integer
+          format: int32
+          description: Available quantity in inventory
+          minimum: 0
+        sku:
+          type: string
+          description: Stock Keeping Unit
+          maxLength: 100
+        category:
+          $ref: '#/components/schemas/CompactCategory'
+        brand:
+          $ref: '#/components/schemas/CompactBrand'
+        imageUrl:
+          type: string
+          description: Product image URL
+          maxLength: 500
+        createdAt:
+          type: string
+          format: date-time
+          description: Product creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Product last update timestamp
+
+    ProductPageResponse:
+        type: object
+        properties:
+          content:
+            type: array
+            description: List of products in the current page
+            items:
+              $ref: '#/components/schemas/ProductResponse'
+          pageResponse:
+            $ref: './common-schemas.yaml#/components/schemas/PageResponse'
+
+    CompactCategory:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+
+    CompactBrand:
+      type: object
+      properties:
+        name :
+          type: string
+        description:
+          type: string
+        logoUrl:
+          type: string
+
+    ErrorResponse:
+      $ref: './common-schemas.yaml#/components/schemas/ErrorResponse'
+
+    Pageable:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            type: string

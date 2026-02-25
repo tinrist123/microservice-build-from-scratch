@@ -1,0 +1,60 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/product_service
+  data:
+    redis:
+      sentinel:
+        master: mymaster
+        nodes:
+          - localhost:26399
+      timeout: 2s
+      lettuce:
+        shutdown-timeout: 200ms
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+    listener:
+      simple:
+        acknowledge-mode: auto
+        concurrency: 1
+        max-concurrency: 5
+cache:
+  redis:
+    defaultTtl: 15m
+    enabled: true
+
+logging:
+  level:
+    org.springframework.amqp.rabbit.core.RabbitTemplate: DEBUG
+    org.hibernate.SQL: DEBUG
+    com.ecommerce.product.config.interceptor.MeiliLoggingInterceptor: TRACE  # or TRACE for bodies
+
+app:
+  rabbitmq:
+    exchange: demo.exchange
+    queue: demo.queue
+    routing-key: demo.routing.key
+
+  meilisearch:
+    setting:
+      baseHost: http://localhost:7700
+      bearerToken: FcLdiwiHOObQthn2I_dR04RJFJwGGZ-It_Jc4EpBE9Q
+    http:
+      timeout:
+        connect: 3000
+        read: 5000
+        connectionRequest: 2000
+      pool:
+        maxTotal: 50
+        maxPerRoute: 20
+        idleEvictSeconds: 30

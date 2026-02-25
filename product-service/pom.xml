@@ -63,11 +63,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
 			<version>3.1.0</version>
@@ -122,10 +117,37 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-        </dependency>
+
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator-maven-plugin</artifactId>
+			<version>7.18.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ecommerce</groupId>
+			<artifactId>comunication-block</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.meilisearch.sdk</groupId>
+			<artifactId>meilisearch-java</artifactId>
+			<version>0.19.0</version>
+		</dependency>
+
+		<!-- OkHttp3 - Required by MeiliSearch SDK -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.12.0</version>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -158,7 +180,96 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<mainClass>com.ecommerce.product.ProductServiceApplication</mainClass>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.18.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>commons-io</groupId>
+						<artifactId>commons-io</artifactId>
+						<version>2.16.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.commons</groupId>
+						<artifactId>commons-lang3</artifactId>
+						<version>3.18.0</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/openapi/product-client-api-v1.0.0.yaml
+							</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.ecommerce.product.rest.client.v1</apiPackage>
+							<modelPackage>com.ecommerce.product.rest.model</modelPackage>
+							<typeMappings>
+								<typeMapping>Pageable=Pageable</typeMapping>
+							</typeMappings>
+							<importMappings>
+								<importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
+							</importMappings>
+							<configOptions>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useTags>true</useTags>
+								<interfaceOnly>true</interfaceOnly>
+								<skipDefaultInterface>true</skipDefaultInterface>
+							</configOptions>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>warehouse-service-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/openapi/warehouse-service-api-v1.0.0.yaml
+							</inputSpec>
+							<generatorName>java</generatorName>
+							<library>restclient</library>
+							<apiPackage>com.ecommerce.inventory.warehouse.rest.service.v1</apiPackage>
+							<modelPackage>com.ecommerce.inventory.warehouse.rest.model</modelPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<useJakartaEe>true</useJakartaEe>
+								<openApiNullable>false</openApiNullable>
+							</configOptions>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>inventory-service-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/openapi/inventory-service-api-v1.0.0.yaml
+							</inputSpec>
+							<generatorName>java</generatorName>
+							<library>restclient</library>
+							<apiPackage>com.ecommerce.inventory.product.rest.service.v1</apiPackage>
+							<modelPackage>com.ecommerce.inventory.product.rest.model</modelPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<useJakartaEe>true</useJakartaEe>
+								<openApiNullable>false</openApiNullable>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,38 +1,34 @@
 package com.ecommerce.product.controller;
 
-import com.ecommerce.product.messagequeue.producer.MessageProducer;
-import com.ecommerce.product.model.request.ProductDTO;
+import com.ecommerce.product.rest.client.v1.ProductClientApi;
+import com.ecommerce.product.rest.model.ProductPageResponse;
+import com.ecommerce.product.rest.model.ProductResponse;
 import com.ecommerce.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/products")
-public class ProductController {
+public class ProductController implements ProductClientApi {
 
     private final ProductService productService;
-    private final MessageProducer messageProducer;
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<ProductDTO> getProduct(@RequestParam("skus") List<String> skus) {
-        return productService.getProduct(skus);
+    @Override
+    public ResponseEntity<ProductResponse> getProductBySku(String sku) {
+        return Optional.ofNullable(productService.getProductBySku(sku))
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(ProductDTO productDTO) {
-        productService.createProduct(productDTO);
-    }
-
-
-    @PostMapping("/send")
-    @ResponseStatus(HttpStatus.OK)
-    public void sendMessage(@RequestBody ProductDTO productDTO) {
-        messageProducer.sendMessage(productDTO.toString());
+    @Override
+    public ResponseEntity<ProductPageResponse> getProducts(String queryText, String category, Pageable pageable) {
+        return Optional.ofNullable(productService.getProducts(queryText, category, pageable))
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

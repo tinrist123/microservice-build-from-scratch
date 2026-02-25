@@ -1,156 +1,156 @@
-# =====================================
-# 🌱 Java & Spring Boot
-# =====================================
-*.class
-*.jar
-*.war
-*.ear
-*.iml
-*.log
-*.tmp
-*.out
+ # =====================================
+ # 🌱 Java & Spring Boot
+ # =====================================
+ *.class
+ *.jar
+ *.war
+ *.ear
+ *.iml
+ *.log
+ *.tmp
+ *.out
 
-# Build directories
-target/
-build/
-out/
+ # Build directories
+ target/
+ build/
+ out/
 
-# =====================================
-# 🧱 Maven
-# =====================================
-.mvn/
-!/.mvn/wrapper/maven-wrapper.jar
-.mvn/wrapper/maven-wrapper.properties
-.mvn/wrapper/MavenWrapperDownloader.java
+ # =====================================
+ # 🧱 Maven
+ # =====================================
+ .mvn/
+ !/.mvn/wrapper/maven-wrapper.jar
+ .mvn/wrapper/maven-wrapper.properties
+ .mvn/wrapper/MavenWrapperDownloader.java
 
-# =====================================
-# 🧰 IDEs & Editors
-# =====================================
-# IntelliJ IDEA
-.idea/
-*.iws
-*.ipr
+ # =====================================
+ # 🧰 IDEs & Editors
+ # =====================================
+ # IntelliJ IDEA
+ .idea/
+ *.iws
+ *.ipr
 
-# VS Code
-.vscode/
-.history/
+ # VS Code
+ .vscode/
+ .history/
 
-# Eclipse
-.project
-.classpath
-.settings/
-.metadata/
+ # Eclipse
+ .project
+ .classpath
+ .settings/
+ .metadata/
 
-# NetBeans
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/. nb-gradle/
+ # NetBeans
+ /nbproject/private/
+ /nbbuild/
+ /dist/
+ /nbdist/
+ /. nb-gradle/
 
-# =====================================
-# 🐳 Docker & Container
-# =====================================
-# Docker logs & temp
-*.pid
-*.seed
-*.pid.lock
-docker-compose.override.yml
-.env
-.env.*
-logs/
-**/logs/
+ # =====================================
+ # 🐳 Docker & Container
+ # =====================================
+ # Docker logs & temp
+ *.pid
+ *.seed
+ *.pid.lock
+ docker-compose.override.yml
+ .env
+ .env.*
+ logs/
+ **/logs/
 
-# =====================================
-# 🧩 OS-specific files
-# =====================================
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
+ # =====================================
+ # 🧩 OS-specific files
+ # =====================================
+ # macOS
+ .DS_Store
+ .AppleDouble
+ .LSOverride
 
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+ # Windows
+ Thumbs.db
+ ehthumbs.db
+ Desktop.ini
 
-# Linux
-*~
+ # Linux
+ *~
 
-# =====================================
-# 🧾 Configuration & Secrets
-# =====================================
-# Custom config & credentials
-application-*.yml
-application-*.yaml
-application-*.properties
-config/
-secrets/
-**/local.properties
-**/credentials.json
-**/keystore.jks
-**/truststore.jks
+ # =====================================
+ # 🧾 Configuration & Secrets
+ # =====================================
+ # Custom config & credentials
+ application-*.yml
+ application-*.yaml
+ application-*.properties
+ config/
+ secrets/
+ **/local.properties
+ **/credentials.json
+ **/keystore.jks
+ **/truststore.jks
 
-# =====================================
-# 🧪 Testing & Reports
-# =====================================
-*.swp
-test-output/
-reports/
-jacoco.exec
-.coverage
-*.lcov
+ # =====================================
+ # 🧪 Testing & Reports
+ # =====================================
+ *.swp
+ test-output/
+ reports/
+ jacoco.exec
+ .coverage
+ *.lcov
 
-# =====================================
-# 🧠 Logs & Temp Files
-# =====================================
-*.log
-logs/
-**/tmp/
-**/temp/
-hs_err_pid*
-replay_pid*
+ # =====================================
+ # 🧠 Logs & Temp Files
+ # =====================================
+ *.log
+ logs/
+ **/tmp/
+ **/temp/
+ hs_err_pid*
+ replay_pid*
 
-# =====================================
-# 🪣 Other
-# =====================================
-*.bak
-*.orig
-*.rej
-*.diff
-*.patch
-*.swp
-*.swo
-*.bak
-*.old
-*.save
-*.log.*
+ # =====================================
+ # 🪣 Other
+ # =====================================
+ *.bak
+ *.orig
+ *.rej
+ *.diff
+ *.patch
+ *.swp
+ *.swo
+ *.bak
+ *.old
+ *.save
+ *.log.*
 
-# =====================================
-# 🧰 Node / Frontend (if present)
-# =====================================
-node_modules/
-dist/
-build/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-pnpm-lock.yaml
+ # =====================================
+ # 🧰 Node / Frontend (if present)
+ # =====================================
+ node_modules/
+ dist/
+ build/
+ npm-debug.log*
+ yarn-debug.log*
+ yarn-error.log*
+ package-lock.json
+ pnpm-lock.yaml
 
-# =====================================
-# 🧬 Kubernetes / Helm (optional)
-# =====================================
-*.yaml.backup
-*.yml.backup
-.kube/
-helm-release.yaml
-charts/
+ # =====================================
+ # 🧬 Kubernetes / Helm (optional)
+ # =====================================
+ *.yaml.backup
+ *.yml.backup
+ .kube/
+ helm-release.yaml
+ charts/
 
-# =====================================
-# ✅ Custom Project Folders (optional)
-# =====================================
-/config-server/local-config/
-/db-dump/
-/docs/generated/
-/scripts/tmp/
+ # =====================================
+ # ✅ Custom Project Folders (optional)
+ # =====================================
+ /config-server/local-config/
+ /db-dump/
+ /docs/generated/
+ /scripts/tmp/

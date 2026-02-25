@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/discovery/pom.xml" />
         <option value="$PROJECT_DIR$/logging.library/pom.xml" />
         <option value="$PROJECT_DIR$/common-cache/pom.xml" />
+        <option value="$PROJECT_DIR$/comunication/pom.xml" />
+        <option value="$PROJECT_DIR$/comunication-block/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

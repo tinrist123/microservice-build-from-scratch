@@ -33,28 +33,31 @@ services:
       - "8081:8081"
     volumes:
       - nexus-data:/nexus-data
-    networks:
-      - mynet
-
-  product-service:
-    build:
-      context: ./product-service
-      dockerfile: Dockerfile
-    image: product-service:latest
-    ports:
-      - "8082:8082"
-
-    depends_on:
-      - nexus
     environment:
-      - JAVA_TOOL_OPTIONS=-Xms212m -Xmx212m -XX:ActiveProcessorCount=1
-    restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 300M
+      - INSTALL4J_ADD_VM_PARAMS=-Xms2g -Xmx2g -XX:MaxDirectMemorySize=2g
     networks:
       - mynet
+
+#  product-service:
+#    container_name: product-service
+#    build:
+#      context: ./product-service
+#      dockerfile: Dockerfile
+#    image: product-service:latest
+#    ports:
+#      - "8082:8082"
+#    depends_on:
+#      - nexus
+#      - rabbitmq
+#    environment:
+#      - JAVA_TOOL_OPTIONS=-Xms212m -Xmx212m -XX:ActiveProcessorCount=1
+#    restart: always
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 300M
+#    networks:
+#      - mynet
   redis-master:
     image: redis:7.4-alpine
     container_name: redis-master
@@ -139,5 +142,45 @@ services:
     networks:
       - mynet
 
+  redis-sentinel-local:
+    image: redis:7.4-alpine
+    container_name: redis-sentinel-local
+    command: redis-sentinel /etc/redis/sentinel.conf
+    volumes:
+      - D:\Learning\docker-storage\redis-sentinel\sentinel-local.conf:/etc/redis/sentinel.conf
+    ports:
+      - "26399:26379"
+    depends_on:
+      - redis-master
+    networks:
+      - mynet
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"     # AMQP
+      - "15672:15672"   # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - D:/Learning/docker-storage/rabbitmq:/var/lib/rabbitmq
+    restart: unless-stopped
+    networks:
+      - mynet
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.35.0
+    container_name: meilisearch
+    ports:
+      - "7700:7700"
+    volumes:
+      - D:/Learning/docker-storage/meilisearch/meili_data:/meili_data
+    environment:
+      MEILI_MASTER_KEY: FcLdiwiHOObQthn2I_dR04RJFJwGGZ-It_Jc4EpBE9Q
+    networks:
+      - mynet
 volumes:
   nexus-data:

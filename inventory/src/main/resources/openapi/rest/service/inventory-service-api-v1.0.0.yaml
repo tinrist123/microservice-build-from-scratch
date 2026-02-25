@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Inventory Service API
+  description: API for inventory management
+  version: 1.0.0
+
+paths:
+  /service-api/v1/inventory/products:
+    post:
+      tags:
+        - inventory-service
+      summary: Get inventory by SKUs of product
+      operationId: getInventoryBySkus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type : array
+                items:
+                  $ref: '#/components/schemas/InventoryResponse'
+
+components:
+  schemas:
+    InventoryResponse:
+      type: object
+      properties:
+        sku:
+          type: string
+        availableQuantity:
+          type: integer
+          format: int32

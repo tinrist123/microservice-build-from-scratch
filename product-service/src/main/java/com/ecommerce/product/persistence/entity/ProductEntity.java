@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -28,7 +27,12 @@ public class ProductEntity extends AbstractBaseEntity {
     @Column(name = "discount", precision = 5, scale = 2)
     private BigDecimal discount;
 
+    @Column(name = "brand_id", nullable = false, length = 36)
+    private String brandId;
+
+    @Column(name = "category_id", nullable = false, length = 36)
+    private String categoryId;
+
     @Column(name = "is_active")
     private Boolean isActive;
-
 }

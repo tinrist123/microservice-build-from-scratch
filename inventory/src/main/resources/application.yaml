@@ -1,13 +1,21 @@
-
-
 spring:
   application:
     name: inventory-service
   datasource:
-    url: jdbc:mysql://localhost:3306/jpa-approach/product_service
+    url: jdbc:mysql://localhost:3306/inventory_service
     username: admin
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: InventoryHikariCP
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000           # 30 seconds
+      connection-timeout: 20000     # 20 seconds
+      max-lifetime: 1800000         # 30 minutes
+      auto-commit: true
+      validation-timeout: 5000
+      connection-test-query: SELECT 1  # Ensures connectivity health check
 
   jpa:
     show-sql: true       # to show SQL in console
@@ -24,3 +32,11 @@ logging:
 server:
   port: 8080
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
