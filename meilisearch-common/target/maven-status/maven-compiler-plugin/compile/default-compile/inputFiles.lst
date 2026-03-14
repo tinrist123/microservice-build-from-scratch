@@ -1,0 +1,8 @@
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\client\MeilisearchClient.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\config\MeilisearchAutoConfiguration.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\config\MeiliSearchHttpConfig.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\config\MeiliSearchIntegrationConfig.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\config\MeiliSearchRestClientConfig.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\interceptor\MeiliLoggingInterceptor.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\model\SearchRequest.java
+D:\Learning\Project\microservices\meilisearch-common\src\main\java\com\ecommerce\meilisearch\model\SearchResponse.java

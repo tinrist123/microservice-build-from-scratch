@@ -1,0 +1,11 @@
+com\ecommerce\meilisearch\config\MeiliSearchHttpConfig$Timeout.class
+com\ecommerce\meilisearch\config\MeiliSearchRestClientConfig.class
+com\ecommerce\meilisearch\model\SearchResponse.class
+com\ecommerce\meilisearch\interceptor\MeiliLoggingInterceptor.class
+com\ecommerce\meilisearch\config\MeiliSearchHttpConfig$Pool.class
+com\ecommerce\meilisearch\model\SearchRequest.class
+com\ecommerce\meilisearch\config\MeiliSearchIntegrationConfig.class
+com\ecommerce\meilisearch\config\MeilisearchAutoConfiguration.class
+com\ecommerce\meilisearch\model\SearchRequest$SearchRequestBuilder.class
+com\ecommerce\meilisearch\config\MeiliSearchHttpConfig.class
+com\ecommerce\meilisearch\client\MeilisearchClient.class
